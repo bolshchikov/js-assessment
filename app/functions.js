@@ -52,7 +52,16 @@ define(function() {
     },
 
     curryIt : function(fn) {
-        
+        var args = [];
+        return function helper (param) {
+            args.push(param);
+            if (args.length < fn.length) {
+                return helper;
+            }
+            else {
+                return fn.apply(null, args);
+            }
+        }
     }
   };
 });
